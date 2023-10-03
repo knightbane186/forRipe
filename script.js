@@ -1,3 +1,6 @@
+
+// this page handles the fetch methods
+
 const quizContainer = document.getElementById('quiz-container');
 const submitBtn = document.getElementById('submit-btn');
 
@@ -27,10 +30,6 @@ fetch('https://super-awesome-quiz.vercel.app/questions')
     .catch(error => {
         quizContainer.innerHTML = "Error loading questions. Please try again later.";
     });
-
-
-
-
 
 // Handle form submission and score calculation, I can add additioinal features here if needed but I think this will suffice. 
 submitBtn.addEventListener('click', function() {
