@@ -1,30 +1,38 @@
 const quizContainer = document.getElementById('quiz-container');
 const submitBtn = document.getElementById('submit-btn');
 
-// Fetching questions and populating the quiz
+
+// // fetch('https://super-awesome-quiz.vercel.app/api/questions')
+// this is not working 
 fetch('https://super-awesome-quiz.vercel.app/questions')
-// fetch('https://super-awesome-quiz.vercel.app/api/questions')
     .then(response => response.json())
     .then(data => {
-        data.forEach(question => {
-            const questionDiv = document.createElement('div');
-            questionDiv.innerHTML = `
-                <h2>${question.text}</h2>
-                ${question.options.map(option => `
-                    <label>
-                        <input type="radio" name="${question.id}" value="${option.id}">
-                        ${option.text}
-                    </label>
-                `).join('<br>')}
-            `;
-            quizContainer.appendChild(questionDiv);
+        // Accessing the nested questions array
+        data.sections.forEach(section => {
+            section.questions.forEach(question => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <h2>${question.question_text}</h2>
+                    ${question.answer_options.map(option => `
+                        <label>
+                            <input type="radio" name="${question.id}" value="${option.id}">
+                            ${option.text}
+                        </label>
+                    `).join('<br>')}
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
         });
     })
     .catch(error => {
         quizContainer.innerHTML = "Error loading questions. Please try again later.";
     });
 
-// Handle form submission and score calculation
+
+
+
+
+// Handle form submission and score calculation, I can add additioinal features here if needed but I think this will suffice. 
 submitBtn.addEventListener('click', function() {
     const quizForm = document.getElementById('quiz-form');
     const formData = new FormData(quizForm);   
@@ -36,7 +44,7 @@ submitBtn.addEventListener('click', function() {
             answer: value
         });
     });
-
+//this  bit will basically send the data and check the response match 
     fetch('https://super-awesome-quiz.vercel.app/score', {
         method: 'POST',
         headers: {

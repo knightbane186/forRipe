@@ -1,15 +1,18 @@
+
+
+/* This will not change since its root. */
 :root {
     --background-color: #f7f9fc;
     --text-color: #333;
     --container-background-color: white;
-    --title-color: #4a90e2;
+    --title-color: #3fa097;
 }
-
+/* but this will we can even add icons here.  */
 [data-theme='dark'] {
     --background-color: #2c2c2c;
-    --text-color: #ddd;
+    --text-color: #4ec4ba;
     --container-background-color: #3c3c3c;
-    --title-color: #357ab7;
+    --title-color: #3fa097;
 }
 
 body {
